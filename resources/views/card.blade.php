@@ -9,9 +9,9 @@
             <p>
             <a href="{{route('basket')}}" class="btn btn-primary"
              role="button">В корзину</a>
-                {{$product->getCategory()->name}}
 
-                <a href="http://internet-shop.tmweb.ru/mobiles/iphone_x_64"
+
+                <a href="{{route('product',[$product->category->code,$product->code])}}"
                    class="btn btn-default"
                    role="button">Подробнее</a>
             </p>
