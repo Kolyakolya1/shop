@@ -1,4 +1,4 @@
-@extends('master')
+@extends('+.master')
 @section('title','Корзина')
 @section('content')
     <div class="starter-template">
