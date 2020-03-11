@@ -16,29 +16,36 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <a href="http://internet-shop.tmweb.ru/mobiles/iphone_x_256">
-                            <img height="56px" src="http://internet-shop.tmweb.ru/storage/products/iphone_x_silver.jpg">
-                            iPhone X 256GB
-                        </a>
-                    </td>
-                    <td><span class="badge">1</span>
-                        <div class="btn-group form-inline">
-                            <form action="http://internet-shop.tmweb.ru/basket/remove/2" method="POST">
-                                <button type="submit" class="btn btn-danger" href=""><span
-                                        class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                                <input type="hidden" name="_token" value="7vsDmxYxO9ZgF2rkhXEY3TuXybn84QSf68qxpVL0">                            </form>
-                            <form action="http://internet-shop.tmweb.ru/basket/add/2" method="POST">
-                                <button type="submit" class="btn btn-success"
-                                        href=""><span
-                                        class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                <input type="hidden" name="_token" value="7vsDmxYxO9ZgF2rkhXEY3TuXybn84QSf68qxpVL0">                            </form>
-                        </div>
-                    </td>
-                    <td>89990 руб.</td>
-                    <td>89990 руб.</td>
-                </tr>
+                @foreach($order->products as $product)
+                    <tr>
+                        <td>
+                            <a href="{{route('product',[$product->category->code,$product->code])}}">
+                                <img height="56px"
+                                     src="http://internet-shop.tmweb.ru/storage/products/iphone_x_silver.jpg">
+                                {{$product->name}}
+                            </a>
+                        </td>
+                        <td><span class="badge">1</span>
+                            <div class="btn-group">
+                                <form action="{{route('basket-remove',$product)}}" method="POST">
+                                    <button type="submit" class="btn btn-danger"
+                                            href=""><span
+                                            class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                                    @csrf
+                                </form>
+
+                                <form action="{{route('basket-add',$product)}}" method="POST">
+                                    <button type="submit" class="btn btn-success"
+                                       href=""><span
+                                            class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    @csrf
+                                </form>
+                            </div>
+                        </td>
+                        <td>{{$product->price}} руб.</td>
+                        <td>{{$product->price}} руб.</td>
+                    </tr>
+                @endforeach
                 <tr>
                     <td colspan="3">Общая стоимость:</td>
                     <td>89990 руб.</td>
@@ -47,7 +54,8 @@
             </table>
             <br>
             <div class="btn-group pull-right" role="group">
-                <a type="button" class="btn btn-success" href="http://internet-shop.tmweb.ru/basket/place">Оформить заказ</a>
+                <a type="button" class="btn btn-success" href="http://internet-shop.tmweb.ru/basket/place">Оформить
+                    заказ</a>
             </div>
         </div>
     </div>
